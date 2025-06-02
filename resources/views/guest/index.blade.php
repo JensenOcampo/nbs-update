@@ -20,6 +20,8 @@
 
     <br>
     <div class="content-wrapper">
+        @include('partials.messages')
+
         <!-- Search Results Info -->
         @if (request('q'))
             <div class="container">

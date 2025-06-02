@@ -6,13 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['title', 'description', 'image', 'price', 'image', 'quantity', 'price', 'category_id'];
+    protected $fillable = [
+        'title',
+        'description',
+        'image',
+        'price',
+        'discount_price',
+        'quantity',
+        'category_id'
+    ];
 
-    public function index()
-    {
-        $products = Product::all(); // Fetch all products
-        return view('guest.index', compact('products'));
-    }
+    protected $casts = [
+        'price' => 'decimal:2',
+        'discount_price' => 'decimal:2',
+        'quantity' => 'integer',
+    ];
 
     public function category()
     {

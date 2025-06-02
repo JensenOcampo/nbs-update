@@ -92,60 +92,90 @@
                                 <div>
                                     <label for="title" class="block text-gray-700 font-semibold mb-2">Product
                                         Title</label>
-                                    <input type="text" id="title" name="title" placeholder="Write a title..."
-                                        required
-                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                                    <input type="text" id="title" name="title" value="{{ old('title') }}"
+                                        placeholder="Enter product title"
+                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('title') border-red-500 @enderror" />
+                                    @error('title')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
+
                                 <div>
                                     <label for="description" class="block text-gray-700 font-semibold mb-2">Product
                                         Description</label>
-                                    <input type="text" id="description" name="description"
-                                        placeholder="Write a description..." required
-                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                                    <textarea id="description" name="description" rows="3" placeholder="Enter product description"
+                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
+
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
                                         <label for="price" class="block text-gray-700 font-semibold mb-2">Product
                                             Price</label>
-                                        <input type="number" id="price" name="price"
-                                            placeholder="Write a price..." required min="0" step="0.01"
-                                            class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                                        <input type="number" step="0.01" id="price" name="price"
+                                            value="{{ old('price') }}" placeholder="Enter product price" min="0"
+                                            class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('price') border-red-500 @enderror" />
+                                        @error('price')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
+
                                     <div>
                                         <label for="dis_price" class="block text-gray-700 font-semibold mb-2">Discount
                                             Price</label>
-                                        <input type="number" id="dis_price" name="dis_price"
-                                            placeholder="Write a discount if applied..." min="0" step="0.01"
-                                            class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                                        <input type="number" step="0.01" id="dis_price" name="dis_price"
+                                            value="{{ old('dis_price') }}" placeholder="Enter discount price (optional)"
+                                            min="0"
+                                            class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('dis_price') border-red-500 @enderror" />
+                                        @error('dis_price')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
+
                                 <div>
                                     <label for="quantity" class="block text-gray-700 font-semibold mb-2">Product
                                         Quantity</label>
-                                    <input type="number" id="quantity" name="quantity"
-                                        placeholder="Write a quantity..." required min="0"
-                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                                    <input type="number" id="quantity" name="quantity" value="{{ old('quantity') }}"
+                                        placeholder="Enter product quantity" min="0" step="1"
+                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('quantity') border-red-500 @enderror" />
+                                    @error('quantity')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
+
                                 <div>
                                     <label for="category" class="block text-gray-700 font-semibold mb-2">Product
                                         Category</label>
-                                    <select id="category" name="category" required
-                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
-                                        <option value="" disabled selected>Select a category...</option>
-                                        @foreach ($category as $category)
-                                            <option value="{{ $category->category_name }}">
-                                                {{ $category->category_name }}</option>
+                                    <select id="category" name="category"
+                                        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('category') border-red-500 @enderror">
+                                        <option value="">Select a category...</option>
+                                        @foreach ($category as $cat)
+                                            <option value="{{ $cat->id }}"
+                                                {{ old('category') == $cat->id ? 'selected' : '' }}>
+                                                {{ $cat->category_name }}
+                                            </option>
                                         @endforeach
                                     </select>
+                                    @error('category')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
+
                                 <div>
                                     <label for="image" class="block text-gray-700 font-semibold mb-2">Product
                                         Image</label>
-                                    <input type="file" id="image" name="image" accept="image/*" required
-                                        class="w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                    <input type="file" id="image" name="image" accept="image/*"
+                                        class="w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('image') border-red-500 @enderror"
                                         onchange="previewImage(event)" />
+                                    @error('image')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                     <img id="imagePreview" class="image-preview" alt="Image Preview" />
                                 </div>
+
                                 <div>
                                     <button type="submit"
                                         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl py-3 transition focus:outline-none focus:ring-4 focus:ring-indigo-300">
